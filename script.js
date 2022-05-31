@@ -56,10 +56,27 @@ const Gameboard = (function(){
                 _gameboardDiv.removeEventListener("click", _clickBoard);
             }
             else{
-                 _switchCurrentPlayer();
+                if (_gameboardFull() === false){
+                     _switchCurrentPlayer();
+                }
+                else{
+                    alert ("Draw!");
+                    _gameboardDiv.removeEventListener("click", _clickBoard);
+                }
             }
         }
 
+    }
+
+    function _gameboardFull(){
+        emptySpaces = _gameboardArr.some( (row) => {
+            return row.some( (item) => {
+                console.log(item);
+                return item === null;
+            });
+        });
+
+        return !emptySpaces;
     }
 
     function _checkVictory(lastClicked){
