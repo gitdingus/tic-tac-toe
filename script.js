@@ -49,17 +49,23 @@ const Gameboard = (function(){
 
 })();
 
-const Player = function(name){
+const Player = function(name, ch){
     let player = {};
 
     player.name = name;
+    player.tick = ch;
 
     const getName = function(){
         return player.name;
     }
 
+    const getTick(){
+        return player.tick;
+    }
+
     return {
-        getName
+        getName,
+        getTick
     } 
 }
 
@@ -68,5 +74,5 @@ Gameboard.drawNewGameboard();
 let playerOne = Player("Tim");
 let playerTwo = Player("Eric");
 
-Gameboard.addPlayerOne(playerOne);
-Gameboard.addPlayerTwo(playerTwo);
+Gameboard.addPlayerOne(playerOne, "X");
+Gameboard.addPlayerTwo(playerTwo, "O");
