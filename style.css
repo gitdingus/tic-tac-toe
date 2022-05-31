@@ -38,3 +38,46 @@
 .buttons{
     justify-self: right;
 }
+
+.modal{
+    display: none;
+}
+.modal.active{
+    position: absolute;
+    background-color: rgba(255, 255, 255, .9);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.new-game-screen{
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 30px;
+
+}
+
+.new-game-screen > form{
+    display: grid;
+    grid-template-columns: 125px 250px;
+    gap: 15px;
+}
+
+.new-game-screen > form > h1{
+    grid-area: 1 / 1 / 2 / 3;
+    text-align: center;
+}
+
+.new-game-screen > form > .buttons{
+    grid-area: 4 / 1 / 5 / 3;
+}
+
+.new-game-screen > form > label{
+    text-align: right;
+}
