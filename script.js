@@ -1,5 +1,6 @@
 const GameController = (function(){
     const _newGameModal = document.querySelector("#new-game-modal");
+    const _outcomeModal = document.querySelector("#outcome-modal-container");
     const _openNewGameModal = document.querySelector("#open-new-game-modal");
     const _newGameForm = document.querySelector("#new-game-form");
     const _cancelNewGameButton = document.querySelector("#cancel-new-game-button");
@@ -11,6 +12,7 @@ const GameController = (function(){
     _openNewGameModal.addEventListener("click", _toggleNewGameScreen);
     _cancelNewGameButton.addEventListener("click", _toggleNewGameScreen);
     _newGameForm.addEventListener("submit", _createNewGame);
+    _outcomeModal.addEventListener("click", _toggleOutcomeModal);
     
     function _createNewGame(e){
         e.preventDefault();
@@ -31,8 +33,20 @@ const GameController = (function(){
         _newGameModal.classList.toggle("active");
     }
 
+    function _toggleOutcomeModal(){
+        _outcomeModal.classList.toggle("active");
+    }
+
+    function displayOutcome(message){
+        const outcomeMessage = _outcomeModal.querySelector("h1");
+
+        outcomeMessage.textContent = message;
+
+        _outcomeModal.classList.toggle("active");
+    }
+
     return {
-        
+        displayOutcome
     }
 })();
 
@@ -91,7 +105,7 @@ const Gameboard = (function(){
 
             if (_checkVictory(coordinates) === true){
 
-                alert(`${getCurrentPlayer().getName()} has won the game!`);
+                GameController.displayOutcome(`${getCurrentPlayer().getName()} has won the game!`);
                 _gameboardDiv.removeEventListener("click", _clickBoard);
             }
             else{
@@ -99,7 +113,7 @@ const Gameboard = (function(){
                      _switchCurrentPlayer();
                 }
                 else{
-                    alert ("Draw!");
+                    GameController.displayOutcome("Draw!");
                     _gameboardDiv.removeEventListener("click", _clickBoard);
                 }
             }
