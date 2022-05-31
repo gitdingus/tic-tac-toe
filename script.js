@@ -47,7 +47,58 @@ const Gameboard = (function(){
             _gameboardArr[coordinates[0]][coordinates[1]] = getCurrentPlayer();
             squareDiv.textContent = getCurrentPlayer().getTick();
 
-            _switchCurrentPlayer();
+            if (_checkVictory(coordinates) === true){
+
+                alert(`${getCurrentPlayer().getName()} has won the game!`);
+            }
+            else{
+                 _switchCurrentPlayer();
+            }
+        }
+
+    }
+
+    function _checkVictory(lastClicked){
+        if (_checkRow(lastClicked[0]) === true || _checkColumn(lastClicked[1])  === true || _checkDiagonal() === true){
+            return true;
+        }
+        else {
+            return false;
+        }
+
+        
+    }
+
+    function _checkRow(y){
+        for (let i = 0; i < 3; i++){
+            if (_gameboardArr[y][i] !== getCurrentPlayer()){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    function _checkColumn(x){
+        for (let i = 0; i < 3; i++){
+            if (_gameboardArr[i][x] !== getCurrentPlayer()){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    function _checkDiagonal(){
+        const currentPlayer = getCurrentPlayer();
+        if (_gameboardArr[0][0] === currentPlayer && _gameboardArr[1][1] === currentPlayer && _gameboardArr[2][2] === currentPlayer){
+            return true;
+        }
+        else if (_gameboardArr[2][0] === currentPlayer && _gameboardArr[1][1] === currentPlayer && _gameboardArr[0][2] === currentPlayer){
+            return true;
+        }
+        else{
+            return false;
         }
     }
 
