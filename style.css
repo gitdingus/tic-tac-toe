@@ -39,10 +39,10 @@
     justify-self: right;
 }
 
-#modal{
+#new-game-modal{
     display: none;
 }
-#modal.active{
+#new-game-modal.active{
     position: absolute;
     background-color: rgba(255, 255, 255, .9);
     top: 0;

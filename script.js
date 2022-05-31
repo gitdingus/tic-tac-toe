@@ -1,5 +1,5 @@
 const GameController = (function(){
-    const _newGameModal = document.querySelector("#modal");
+    const _newGameModal = document.querySelector("#new-game-modal");
     const _openNewGameModal = document.querySelector("#open-new-game-modal");
     const _newGameForm = document.querySelector("#new-game-form");
     const _cancelNewGameButton = document.querySelector("#cancel-new-game-button");
