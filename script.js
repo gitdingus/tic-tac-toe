@@ -1,13 +1,15 @@
 const Gameboard = (function(){
     const _gameboardDiv = document.querySelector('.gameboard');
-    
+    const _gameboardArr = [];
     let _players = [];
     let _currentPlayer = 0;
 
     function drawNewGameboard(){
             for (let i = 0; i < 3; i++){
+                _gameboardArr[i] = [];
                 for (let j = 0; j < 3; j++){
                     _gameboardDiv.appendChild(_createSquare(i,j));
+                    _gameboardArr[i][j] = null;
                 }
             }
     }
@@ -37,7 +39,16 @@ const Gameboard = (function(){
 
     function _clickSquare(event){
         console.log(`${getCurrentPlayer().getName()} clicked ${event.target.getAttribute("data-position")}`);
-        _switchCurrentPlayer();
+        
+        const squareDiv = event.target;
+        const coordinates = squareDiv.getAttribute("data-position").split(",");
+
+        if (_gameboardArr[coordinates[0]][coordinates[1]] === null){
+            _gameboardArr[coordinates[0]][coordinates[1]] = getCurrentPlayer();
+            squareDiv.textContent = getCurrentPlayer().getTick();
+
+            _switchCurrentPlayer();
+        }
     }
 
     function _switchCurrentPlayer(){
