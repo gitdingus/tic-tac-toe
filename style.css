@@ -16,6 +16,25 @@
     align-items: center;
 }
 
+.gameboard{
+    justify-self: center;
+
+    display: grid;
+    grid-template-columns: repeat(3, 125px);
+    grid-template-rows: repeat(3, 125px);
+    gap: 3px;
+
+    background-color: black;
+}
+
+.square{
+    background-color: white;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .buttons{
     justify-self: right;
 }
