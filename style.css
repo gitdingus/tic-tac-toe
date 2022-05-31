@@ -1,0 +1,21 @@
+.arena{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, auto);
+
+    width: 75vw;
+
+}
+
+.players{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+
+    justify-items: center;
+    align-items: center;
+}
+
+.buttons{
+    justify-self: right;
+}
