@@ -25,23 +25,23 @@
 
             </div>
             <div class="buttons">
-                <button id="new-game-button">New Game</button>
+                <button id="open-new-game-modal">New Game</button>
             </div>
 
         </div>
 
-        <div class="modal">
+        <div id="modal">
             <div class="new-game-screen">
 
-                <form>
+                <form id="new-game-form">
                     <h1>New game</h1>
                     <label for="player-one-input">Player One</label>
                     <input id="player-one-input" type="text" required>
                     <label for="player-two-input">Player Two</label>
                     <input id="player-two-input" type="text" required>
                     <div class="buttons">
-                        <button type="reset">Cancel</button>
-                        <button type="submit">Play!</button>
+                        <button id="cancel-new-game-button" type="reset">Cancel</button>
+                        <button id="new-game-button" type="submit">Play!</button>
                     <div>
                 </form>
 

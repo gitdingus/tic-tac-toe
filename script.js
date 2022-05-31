@@ -1,3 +1,41 @@
+const GameController = (function(){
+    const _newGameModal = document.querySelector("#modal");
+    const _openNewGameModal = document.querySelector("#open-new-game-modal");
+    const _newGameForm = document.querySelector("#new-game-form");
+    const _cancelNewGameButton = document.querySelector("#cancel-new-game-button");
+    const _playerOneInput = document.querySelector("#player-one-input");
+    const _playerTwoInput = document.querySelector("#player-two-input");
+    const _playerOneLabel = document.querySelector(".player.player-one p");
+    const _playerTwoLabel = document.querySelector(".player.player-two p");
+
+    _openNewGameModal.addEventListener("click", _toggleNewGameScreen);
+    _cancelNewGameButton.addEventListener("click", _toggleNewGameScreen);
+    _newGameForm.addEventListener("submit", _createNewGame);
+    
+    function _createNewGame(e){
+        e.preventDefault();
+
+        let playerOne = Player(_playerOneInput.value, "X");
+        let playerTwo = Player(_playerTwoInput.value, "O");
+
+        Gameboard.newGame(playerOne, playerTwo);
+
+        _playerOneLabel.textContent = playerOne.getName();
+        _playerTwoLabel.textContent = playerTwo.getName();
+
+        _toggleNewGameScreen();
+
+
+    }
+    function _toggleNewGameScreen(){
+        _newGameModal.classList.toggle("active");
+    }
+
+    return {
+        
+    }
+})();
+
 const Gameboard = (function(){
     const _gameboardDiv = document.querySelector('.gameboard');
     const _gameboardArr = [];
@@ -5,6 +43,7 @@ const Gameboard = (function(){
     let _currentPlayer = 0;
 
     function newGame(playerOne, playerTwo){
+        _players = [];
         _players.push(playerOne);
         _players.push(playerTwo);
 
@@ -71,7 +110,6 @@ const Gameboard = (function(){
     function _gameboardFull(){
         emptySpaces = _gameboardArr.some( (row) => {
             return row.some( (item) => {
-                console.log(item);
                 return item === null;
             });
         });
@@ -157,9 +195,3 @@ const Player = function(name, ch){
         getTick
     } 
 }
-
-let playerOne = Player("Tim", "X");
-let playerTwo = Player("Eric", "O");
-
-
-Gameboard.newGame(playerOne, playerTwo);
