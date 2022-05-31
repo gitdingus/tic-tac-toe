@@ -51,6 +51,7 @@ const Gameboard = (function(){
             if (_checkVictory(coordinates) === true){
 
                 alert(`${getCurrentPlayer().getName()} has won the game!`);
+                _gameboardDiv.removeEventListener("click", _clickBoard);
             }
             else{
                  _switchCurrentPlayer();
