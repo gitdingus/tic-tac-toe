@@ -71,8 +71,8 @@ const Player = function(name, ch){
 
 Gameboard.drawNewGameboard();
 
-let playerOne = Player("Tim");
-let playerTwo = Player("Eric");
+let playerOne = Player("Tim", "X");
+let playerTwo = Player("Eric", "O");
 
-Gameboard.addPlayerOne(playerOne, "X");
-Gameboard.addPlayerTwo(playerTwo, "O");
+Gameboard.addPlayerOne(playerOne);
+Gameboard.addPlayerTwo(playerTwo);
