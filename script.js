@@ -4,28 +4,30 @@ const Gameboard = (function(){
     let _players = [];
     let _currentPlayer = 0;
 
-    function drawNewGameboard(){
-            for (let i = 0; i < 3; i++){
-                _gameboardArr[i] = [];
-                for (let j = 0; j < 3; j++){
-                    _gameboardDiv.appendChild(_createSquare(i,j));
-                    _gameboardArr[i][j] = null;
-                }
-            }
+    function newGame(playerOne, playerTwo){
+        _players.push(playerOne);
+        _players.push(playerTwo);
 
-            _gameboardDiv.addEventListener("click", _clickBoard);
-    }
+        _currentPlayer = 0;
 
-    function addPlayerOne(player){
-        _players[0] = player;
-    }
-
-    function addPlayerTwo(player){
-        _players[1] = player;
+        _clearGameboard();
+        _drawNewGameboard();
     }
 
     function getCurrentPlayer(){
         return _players[_currentPlayer];
+    }
+
+    function _drawNewGameboard(){
+        for (let i = 0; i < 3; i++){
+            _gameboardArr[i] = [];
+            for (let j = 0; j < 3; j++){
+                _gameboardDiv.appendChild(_createSquare(i,j));
+                _gameboardArr[i][j] = null;
+            }
+        }
+
+        _gameboardDiv.addEventListener("click", _clickBoard);
     }
 
     function _createSquare(x, y){
@@ -66,9 +68,7 @@ const Gameboard = (function(){
         }
         else {
             return false;
-        }
-
-        
+        }     
     }
 
     function _checkRow(y){
@@ -108,11 +108,14 @@ const Gameboard = (function(){
         _currentPlayer = ++_currentPlayer % 2;
     }
 
+    function _clearGameboard() {
+        squares = Array.from(_gameboardDiv.querySelectorAll(".square"));
+        squares.forEach( s => _gameboardDiv.removeChild(s) );
+    }
+
     
     return {
-        drawNewGameboard, 
-        addPlayerOne, 
-        addPlayerTwo, 
+        newGame,
         getCurrentPlayer
     }
 
@@ -138,10 +141,8 @@ const Player = function(name, ch){
     } 
 }
 
-Gameboard.drawNewGameboard();
-
 let playerOne = Player("Tim", "X");
 let playerTwo = Player("Eric", "O");
 
-Gameboard.addPlayerOne(playerOne);
-Gameboard.addPlayerTwo(playerTwo);
+
+Gameboard.newGame(playerOne, playerTwo);
