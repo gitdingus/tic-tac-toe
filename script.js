@@ -12,6 +12,8 @@ const Gameboard = (function(){
                     _gameboardArr[i][j] = null;
                 }
             }
+
+            _gameboardDiv.addEventListener("click", _clickBoard);
     }
 
     function addPlayerOne(player){
@@ -32,12 +34,11 @@ const Gameboard = (function(){
         square.setAttribute("data-position", `${x},${y}`);
         square.classList.add("square");
         square.textContent = '-';
-        square.addEventListener('click', _clickSquare);
     
         return square;
     }
 
-    function _clickSquare(event){
+    function _clickBoard(event){
         console.log(`${getCurrentPlayer().getName()} clicked ${event.target.getAttribute("data-position")}`);
         
         const squareDiv = event.target;
