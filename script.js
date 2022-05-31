@@ -36,7 +36,12 @@ const Gameboard = (function(){
     }
 
     function _clickSquare(event){
-        console.log(event.target.getAttribute('data-position'));
+        console.log(`${getCurrentPlayer().getName()} clicked ${event.target.getAttribute("data-position")}`);
+        _switchCurrentPlayer();
+    }
+
+    function _switchCurrentPlayer(){
+        _currentPlayer = ++_currentPlayer % 2;
     }
 
     
@@ -59,7 +64,7 @@ const Player = function(name, ch){
         return player.name;
     }
 
-    const getTick(){
+    const getTick = function() {
         return player.tick;
     }
 
