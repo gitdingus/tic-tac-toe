@@ -122,7 +122,7 @@ button:active{
 #outcome-modal-container.active{
 
     font-family: "Permanent Marker";
-    font-size: 3rem;
+    font-size: clamp(20px, 3vw, 40px);
     text-shadow: 10px 10px 20px black;
 }
 
