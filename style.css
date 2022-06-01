@@ -214,4 +214,32 @@ button:active{
         width: calc(100vw - 20px);
         height: 45px;
     }
+
+    .new-game-screen{
+        display: flex;
+        justify-content: center;
+        width: 90vw;
+    }
+    .new-game-screen > form{
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+    }
+
+    .new-game-screen > form > label{
+        align-self: flex-start;
+        font-size: 2.5rem;
+        
+    }
+
+    .new-game-screen > form > input{
+        font-size: 2.5rem;
+        width: 100%;
+
+    }
+
+    .new-game-screen > form button{
+        font-size: 2.5rem;
+        width: 25vw;
+    }
 }
