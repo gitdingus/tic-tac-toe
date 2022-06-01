@@ -198,3 +198,16 @@ button:active{
     box-shadow: 3px 3px 5px black;
 
 }
+
+@media all and (orientation:portrait) {
+
+    .gameboard{
+        grid-template-columns: repeat(3, 18vw);
+        grid-template-rows: repeat(3, 18vw);
+    }
+
+    .arena .buttons button{
+        width: calc(54vw + 6px);
+        height: 45px;
+    }
+}
