@@ -2,13 +2,16 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+
+    height: 100vh;
 }
 .arena{
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(3, auto);
+    gap: 40px;
 
-    width: 75vw;
+    width: 60vw;
 
 }
 
@@ -19,8 +22,24 @@ body{
 
     justify-items: center;
     align-items: center;
+
+    text-align: center;
 }
 
+.player *{
+    margin: 0;
+    padding: 0;
+}
+
+.player h1{
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+.player p{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
 .gameboard{
     justify-self: center;
 
@@ -42,6 +61,7 @@ body{
 
 .buttons{
     justify-self: right;
+    padding-right: 10%;
 }
 
 #new-game-modal,
