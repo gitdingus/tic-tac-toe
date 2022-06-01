@@ -211,7 +211,7 @@ button:active{
     }
 
     .arena .buttons button{
-        width: 100vw;
+        width: calc(100vw - 20px);
         height: 45px;
     }
 }
