@@ -208,6 +208,8 @@ button:active{
         height: calc(100vw - 20px);
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: repeat(3, 1fr);
+
+        font-size: 20vw;
     }
 
     .arena .buttons button{
@@ -240,6 +242,5 @@ button:active{
 
     .new-game-screen > form button{
         font-size: 2.5rem;
-        width: 25vw;
     }
 }
