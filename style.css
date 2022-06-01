@@ -1,17 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 body{
     display: flex;
     justify-content: center;
     align-items: center;
 
-    height: 100vh;
+    padding-top: 30px;
+
+    background-color:aqua;
 }
 .arena{
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(3, auto);
-    gap: 40px;
+    gap: 30px;
 
     width: 60vw;
 
@@ -25,11 +27,15 @@ body{
 .player *{
     margin: 0;
     padding: 0;
+    text-align: center;
 }
 
 .player h1{
     font-size: 1rem;
     font-weight: normal;
+    font-family: "Roboto";
+    font-size: 15px;
+    font-weight: bold;
 }
 
 .player p{
@@ -50,10 +56,11 @@ body{
 
     font-family: "Permanent Marker";
     font-size: 3.5rem;
+    box-shadow: 8px 8px 15px black;
 }
 
 .square{
-    background-color: white;
+    background-color: rgb(137, 255, 255);
     
     display: flex;
     align-items: center;
@@ -61,8 +68,33 @@ body{
 }
 
 .arena .buttons{
-    justify-self: right;
+    justify-self: center;;
 }
+
+button{
+    border: 0;
+    box-shadow: 5px 5px 5px black;
+    background-color:antiquewhite;
+
+    font-family: "Permanent Marker";
+    font-size: 1.5rem;
+}
+
+.arena .buttons button{
+    width: 375px;
+    height: 45px;
+}
+
+button:hover{
+    background-color: rgb(221, 207, 189);
+
+}
+
+button:active{
+    background-color: rgb(219, 209, 197);
+
+}
+
 
 #new-game-modal,
 #outcome-modal-container{
@@ -72,9 +104,11 @@ body{
 #new-game-modal.active,
 #outcome-modal-container.active
 {
+
+    background-color: rgba(0, 255, 255, .8);
+
     position: absolute;
 
-    background-color: rgba(255, 255, 255, .9);
     top: 0;
     left: 0;
     width: 100%;
@@ -86,22 +120,17 @@ body{
 }
 
 #outcome-modal-container.active{
-    background-color: rgba(255, 255 ,0 , .8);
 
     font-family: "Permanent Marker";
-    font-size: 3.25rem;
+    font-size: 3rem;
     text-shadow: 10px 10px 20px black;
 }
 
-#new-game-modal.active{
-    background-color: rgba(236, 228, 228, .9);
-
-}
 
 .new-game-screen{
 
-    background-color: rgb(236, 228, 228);
-    border: 2px solid black;
+    background-color: aqua;
+    box-shadow: 3px 3px 5px black;
     border-radius: 10px;
     padding: 30px;
     font-family: "Permanent Marker";
@@ -116,9 +145,11 @@ body{
 }
 
 .new-game-screen > form > h1{
+    margin: 0;
     grid-area: 1 / 1 / 2 / 3;
     text-align: center;
     font-size: 2em;
+    font-weight: 300;
 }
 
 .new-game-screen > form > .buttons{
@@ -126,7 +157,7 @@ body{
 
     display: flex;
     justify-content: flex-end;
-    gap: 20px; 
+    gap: 35px; 
 }
 
 .new-game-screen > form > label{
@@ -143,21 +174,8 @@ body{
 }
 
 .new-game-screen > form button{
-    background-color: rgb(240, 199, 199);
-    margin-top: 0px 20px;
+    margin-top: 10px;
     padding: 10px 20px;
-    border: 2px solid black;
-    border-radius: 18px;
-
-    font-family: "Permanent Marker";
-}
-
-.new-game-screen > form button:hover{
-    background-color: rgb(224, 161, 161);
-
-}
-
-.new-game-screen > form button:active{
-    background-color: rgb(238, 209, 209);
+    box-shadow: 3px 3px 5px black;
 
 }
