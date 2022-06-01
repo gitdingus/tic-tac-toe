@@ -66,7 +66,7 @@ const GameController = (function(){
         
         square.setAttribute("data-position", `${x},${y}`);
         square.classList.add("square");
-        square.textContent = '-';
+        square.textContent = '';
     
         return square;
     }
@@ -98,7 +98,12 @@ const GameController = (function(){
         _outcomeModal.classList.toggle("active");
     }
 
+    function showBlankGameboard(){
+        _drawNewGameboard();
+    }
+
     return {
+        showBlankGameboard
     }
 })();
 
@@ -212,7 +217,6 @@ const Gameboard = (function(){
     
     return {
         newGame,
-        getCurrentPlayer,
         playPosition
     }
 
@@ -237,3 +241,5 @@ const Player = function(name, ch){
         getTick
     } 
 }
+
+GameController.showBlankGameboard();
