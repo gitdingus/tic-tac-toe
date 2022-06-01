@@ -165,6 +165,7 @@ button:active{
 }
 
 .new-game-screen > form > input{
+    background-color: rgba(255, 255, 255, .9);
     padding: 10px 25px;
     font-size: 1em;
 
