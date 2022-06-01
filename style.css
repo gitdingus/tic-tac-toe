@@ -16,7 +16,7 @@ body{
     grid-template-rows: repeat(3, auto);
     gap: 30px;
 
-    width: 60vw;
+    /* width: 60vw; */
 
 }
 /*
