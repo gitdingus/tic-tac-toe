@@ -61,8 +61,8 @@ body{
     justify-self: center;
 
     display: grid;
-    grid-template-columns: repeat(3, 18vh);
-    grid-template-rows: repeat(3, 18vh);
+    grid-template-columns: repeat(3, max(75px, 18vh));
+    grid-template-rows: repeat(3, max(75px,18vh));
     gap: 3px;
 
     background-color: black;
@@ -94,7 +94,7 @@ button{
 }
 
 .arena .buttons button{
-    width: calc(54vh + 6px);
+    width: max(225px, calc(54vh + 6px));
     height: 45px;
 }
 
