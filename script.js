@@ -8,6 +8,7 @@ const GameController = (function(){
     const _playerTwoInput = document.querySelector("#player-two-input");
     const _playerOneLabel = document.querySelector(".player.player-one p");
     const _playerTwoLabel = document.querySelector(".player.player-two p");
+    const _gameboardDiv = document.querySelector('.gameboard');
 
     _openNewGameModal.addEventListener("click", _toggleNewGameScreen);
     _cancelNewGameButton.addEventListener("click", _toggleNewGameScreen);
@@ -22,6 +23,10 @@ const GameController = (function(){
 
         Gameboard.newGame(playerOne, playerTwo);
 
+        _clearGameboard();
+        _drawNewGameboard();
+        _gameboardDiv.addEventListener("click", _clickBoard);
+
         _playerOneLabel.textContent = playerOne.getName();
         _playerTwoLabel.textContent = playerTwo.getName();
 
@@ -29,58 +34,31 @@ const GameController = (function(){
 
 
     }
-    function _toggleNewGameScreen(){
-        _newGameModal.classList.toggle("active");
+
+    function _clearGameboard() {
+        squares = Array.from(_gameboardDiv.querySelectorAll(".square"));
+        squares.forEach( s => _gameboardDiv.removeChild(s) );
     }
 
-    function _toggleOutcomeModal(){
-        _outcomeModal.classList.toggle("active");
-    }
+    function _clickBoard(event){
+        const squareDiv = event.target;
+        const coordinates = squareDiv.getAttribute("data-position").split(",");
 
-    function displayOutcome(message){
-        const outcomeMessage = _outcomeModal.querySelector("h1");
+        let outcome = Gameboard.playPosition(coordinates[0], coordinates[1]);
 
-        outcomeMessage.textContent = message;
-
-        _outcomeModal.classList.toggle("active");
-    }
-
-    return {
-        displayOutcome
-    }
-})();
-
-const Gameboard = (function(){
-    const _gameboardDiv = document.querySelector('.gameboard');
-    const _gameboardArr = [];
-    let _players = [];
-    let _currentPlayer = 0;
-
-    function newGame(playerOne, playerTwo){
-        _players = [];
-        _players.push(playerOne);
-        _players.push(playerTwo);
-
-        _currentPlayer = 0;
-
-        _clearGameboard();
-        _drawNewGameboard();
-    }
-
-    function getCurrentPlayer(){
-        return _players[_currentPlayer];
-    }
-
-    function _drawNewGameboard(){
-        for (let i = 0; i < 3; i++){
-            _gameboardArr[i] = [];
-            for (let j = 0; j < 3; j++){
-                _gameboardDiv.appendChild(_createSquare(i,j));
-                _gameboardArr[i][j] = null;
+        if (outcome.valid === true){
+            squareDiv.textContent = outcome.player.getTick();
+            if (outcome.victory !== undefined){
+                _displayOutcome(`${outcome.victory} has won!`);
+                _deactivateGameboard();
             }
+            else if (outcome.draw === true){
+                _displayOutcome(`Game ended in a draw!`);
+                _deactivateGameboard();
+            }
+
         }
 
-        _gameboardDiv.addEventListener("click", _clickBoard);
     }
 
     function _createSquare(x, y){
@@ -93,32 +71,84 @@ const Gameboard = (function(){
         return square;
     }
 
-    function _clickBoard(event){
-        console.log(`${getCurrentPlayer().getName()} clicked ${event.target.getAttribute("data-position")}`);
-        
-        const squareDiv = event.target;
-        const coordinates = squareDiv.getAttribute("data-position").split(",");
-
-        if (_gameboardArr[coordinates[0]][coordinates[1]] === null){
-            _gameboardArr[coordinates[0]][coordinates[1]] = getCurrentPlayer();
-            squareDiv.textContent = getCurrentPlayer().getTick();
-
-            if (_checkVictory(coordinates) === true){
-
-                GameController.displayOutcome(`${getCurrentPlayer().getName()} has won the game!`);
-                _gameboardDiv.removeEventListener("click", _clickBoard);
-            }
-            else{
-                if (_gameboardFull() === false){
-                     _switchCurrentPlayer();
-                }
-                else{
-                    GameController.displayOutcome("Draw!");
-                    _gameboardDiv.removeEventListener("click", _clickBoard);
-                }
+    function _deactivateGameboard(){
+        _gameboardDiv.removeEventListener("click", _clickBoard);
+    }
+    function _drawNewGameboard(){
+        for (let i = 0; i < 3; i++){
+            for (let j = 0; j < 3; j++){
+                _gameboardDiv.appendChild(_createSquare(i,j));
             }
         }
+    }
 
+    function _toggleNewGameScreen(){
+        _newGameModal.classList.toggle("active");
+    }
+
+    function _toggleOutcomeModal(){
+        _outcomeModal.classList.toggle("active");
+    }
+
+
+    function _displayOutcome(message){
+        const outcomeMessage = _outcomeModal.querySelector("h1");
+        outcomeMessage.textContent = message;
+
+        _outcomeModal.classList.toggle("active");
+    }
+
+    return {
+    }
+})();
+
+const Gameboard = (function(){
+    const _gameboardArr = [];
+    let _players = [];
+    let _currentPlayer = 0;
+
+    function newGame(playerOne, playerTwo){
+        _players = [];
+        _players.push(playerOne);
+        _players.push(playerTwo);
+
+        _currentPlayer = 0;
+        _resetGameboard();
+    }
+
+    function getCurrentPlayer(){
+        return _players[_currentPlayer];
+    }
+
+    function playPosition(x,y){
+        let outcomes = {};
+        outcomes.player = getCurrentPlayer();
+        if (_gameboardArr[x][y] === null){
+            _gameboardArr[x][y] = getCurrentPlayer();
+            outcomes.valid = true;
+            if (_checkVictory(x,y) === true){
+                outcomes.victory = getCurrentPlayer().getName();
+            }
+            else if (_gameboardFull() === true){
+                outcomes.draw = true;
+            }
+
+            _switchCurrentPlayer();
+        }
+        else{
+            outcomes.valid = false;
+        }
+
+
+        return outcomes;
+    }
+    function _resetGameboard(){
+        for (let i = 0; i < 3; i++){
+            _gameboardArr[i] = [];
+            for (let j = 0; j < 3; j++){
+                _gameboardArr[i][j] = null;
+            }
+        }
     }
 
     function _gameboardFull(){
@@ -131,8 +161,8 @@ const Gameboard = (function(){
         return !emptySpaces;
     }
 
-    function _checkVictory(lastClicked){
-        if (_checkRow(lastClicked[0]) === true || _checkColumn(lastClicked[1])  === true || _checkDiagonal() === true){
+    function _checkVictory(row, col){
+        if (_checkRow(row) === true || _checkColumn(col)  === true || _checkDiagonal() === true){
             return true;
         }
         else {
@@ -140,9 +170,9 @@ const Gameboard = (function(){
         }     
     }
 
-    function _checkRow(y){
+    function _checkRow(row){
         for (let i = 0; i < 3; i++){
-            if (_gameboardArr[y][i] !== getCurrentPlayer()){
+            if (_gameboardArr[row][i] !== getCurrentPlayer()){
                 return false;
             }
         }
@@ -150,9 +180,9 @@ const Gameboard = (function(){
         return true;
     }
 
-    function _checkColumn(x){
+    function _checkColumn(col){
         for (let i = 0; i < 3; i++){
-            if (_gameboardArr[i][x] !== getCurrentPlayer()){
+            if (_gameboardArr[i][col] !== getCurrentPlayer()){
                 return false;
             }
         }
@@ -177,15 +207,13 @@ const Gameboard = (function(){
         _currentPlayer = ++_currentPlayer % 2;
     }
 
-    function _clearGameboard() {
-        squares = Array.from(_gameboardDiv.querySelectorAll(".square"));
-        squares.forEach( s => _gameboardDiv.removeChild(s) );
-    }
+
 
     
     return {
         newGame,
-        getCurrentPlayer
+        getCurrentPlayer,
+        playPosition
     }
 
 })();
