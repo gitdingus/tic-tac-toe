@@ -6,8 +6,12 @@ const GameController = (function(){
     const _cancelNewGameButton = document.querySelector("#cancel-new-game-button");
     const _playerOneInput = document.querySelector("#player-one-input");
     const _playerTwoInput = document.querySelector("#player-two-input");
+    /*
     const _playerOneLabel = document.querySelector(".player.player-one p");
     const _playerTwoLabel = document.querySelector(".player.player-two p");
+    */
+    const _gameStatusMessage = document.querySelector(".game-status > .message");
+
     const _gameboardDiv = document.querySelector('.gameboard');
 
     _openNewGameModal.addEventListener("click", _toggleNewGameScreen);
@@ -27,9 +31,13 @@ const GameController = (function(){
         _drawNewGameboard();
         _gameboardDiv.addEventListener("click", _clickBoard);
 
+
+        _gameStatusMessage.textContent = `${playerOne.getName()}  /  ${playerTwo.getName()}`;
+
+        /*
         _playerOneLabel.textContent = playerOne.getName();
         _playerTwoLabel.textContent = playerTwo.getName();
-
+        */
         _toggleNewGameScreen();
 
 
@@ -98,12 +106,13 @@ const GameController = (function(){
         _outcomeModal.classList.toggle("active");
     }
 
-    function showBlankGameboard(){
+    function initArena(){
+        _gameStatusMessage.textContent = "Start new game!";
         _drawNewGameboard();
     }
 
     return {
-        showBlankGameboard
+        initArena
     }
 })();
 
@@ -242,4 +251,4 @@ const Player = function(name, ch){
     } 
 }
 
-GameController.showBlankGameboard();
+GameController.initArena();
