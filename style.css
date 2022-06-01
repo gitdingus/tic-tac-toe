@@ -8,6 +8,7 @@ body{
     padding-top: 30px;
 
     background-color:aqua;
+
 }
 .arena{
     display: grid;
@@ -199,14 +200,18 @@ button:active{
 }
 
 @media all and (orientation:portrait) {
-
+    body{
+        height: 100vh;
+    }
     .gameboard{
-        grid-template-columns: repeat(3, 18vw);
-        grid-template-rows: repeat(3, 18vw);
+        width: 100vw;
+        height: 100vw;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
     }
 
     .arena .buttons button{
-        width: calc(54vw + 6px);
+        width: calc(75vw + 6px);
         height: 45px;
     }
 }
