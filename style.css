@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
 body{
     display: flex;
     justify-content: center;
@@ -16,14 +18,8 @@ body{
 }
 
 .players{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto;
-
-    justify-items: center;
-    align-items: center;
-
-    text-align: center;
+    display: flex;
+    justify-content: space-around;
 }
 
 .player *{
@@ -37,8 +33,10 @@ body{
 }
 
 .player p{
-    font-size: 1.5rem;
+    font-family: "Permanent Marker";
+    font-size: 2.25rem;
     font-weight: bold;
+    min-height: 2.25rem;
 }
 .gameboard{
     justify-self: center;
@@ -49,6 +47,9 @@ body{
     gap: 3px;
 
     background-color: black;
+
+    font-family: "Permanent Marker";
+    font-size: 3.5rem;
 }
 
 .square{
@@ -59,9 +60,8 @@ body{
     justify-content: center;
 }
 
-.buttons{
+.arena .buttons{
     justify-self: right;
-    padding-right: 10%;
 }
 
 #new-game-modal,
@@ -73,6 +73,7 @@ body{
 #outcome-modal-container.active
 {
     position: absolute;
+
     background-color: rgba(255, 255, 255, .9);
     top: 0;
     left: 0;
@@ -84,29 +85,79 @@ body{
     align-items: center;
 }
 
+#outcome-modal-container.active{
+    background-color: rgba(255, 255 ,0 , .8);
+
+    font-family: "Permanent Marker";
+    font-size: 3.25rem;
+    text-shadow: 10px 10px 20px black;
+}
+
+#new-game-modal.active{
+    background-color: rgba(236, 228, 228, .9);
+
+}
+
 .new-game-screen{
-    background-color: white;
+
+    background-color: rgb(236, 228, 228);
     border: 2px solid black;
     border-radius: 10px;
     padding: 30px;
+    font-family: "Permanent Marker";
 
 }
 
 .new-game-screen > form{
     display: grid;
     grid-template-columns: 125px 250px;
-    gap: 15px;
+    align-items: center;
+    gap: 25px;
 }
 
 .new-game-screen > form > h1{
     grid-area: 1 / 1 / 2 / 3;
     text-align: center;
+    font-size: 2em;
 }
 
 .new-game-screen > form > .buttons{
     grid-area: 4 / 1 / 5 / 3;
+
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px; 
 }
 
 .new-game-screen > form > label{
     text-align: right;
+}
+
+.new-game-screen > form > input{
+    padding: 10px 25px;
+    font-size: 1em;
+
+    border: 1px solid black;
+    border-radius: 20px;
+    box-shadow: 2px 2px 5px black;
+}
+
+.new-game-screen > form button{
+    background-color: rgb(240, 199, 199);
+    margin-top: 0px 20px;
+    padding: 10px 20px;
+    border: 2px solid black;
+    border-radius: 18px;
+
+    font-family: "Permanent Marker";
+}
+
+.new-game-screen > form button:hover{
+    background-color: rgb(224, 161, 161);
+
+}
+
+.new-game-screen > form button:active{
+    background-color: rgb(238, 209, 209);
+
 }
